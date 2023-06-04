@@ -5,6 +5,8 @@
 
         <attr name="srv_spanCount" format="integer"/>
         <attr name="srv_isVertical" format="boolean"/>
+        <attr name="srv_Vertical_Row" format="integer"/>
+        <attr name="srv_Enable_Vertical_Row" format="boolean"/>
 
     </declare-styleable>
 

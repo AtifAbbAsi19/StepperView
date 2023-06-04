@@ -27,11 +27,16 @@ class StepperRV : ConstraintLayout {
     //by default view orientation is vertical
     private var isVertical = true
 
+
+    private var REVERSE_LAYOUT = false
+
     //default span count
     private var GRID_SPAN_COUNT = 2
 
     //rows in vertical flow (for grid scroll)
-    private val NUMBER_OF_ROWS = 1
+    private var NUMBER_OF_ROWS = 1
+
+    private var isEnabledVerticalRow = false
 
     //Primary Constructor
     constructor(context: Context) : super(context)
@@ -54,7 +59,7 @@ class StepperRV : ConstraintLayout {
         try {
             initAttrs(attrs)
         } finally {
-            initUi()
+            initUi(context)
         }
     }
 
@@ -64,18 +69,23 @@ class StepperRV : ConstraintLayout {
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StepperViewRV)
 
-        isVertical = typedArray.getBoolean(R.styleable.StepperViewRV_srv_isVertical, true)
+        isVertical = typedArray.getBoolean(R.styleable.StepperViewRV_srv_isVertical, isVertical)
 
-        GRID_SPAN_COUNT = typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, 2)
+        isEnabledVerticalRow =
+            typedArray.getBoolean(R.styleable.StepperViewRV_srv_Enable_Vertical_Row, isEnabledVerticalRow)
+
+        GRID_SPAN_COUNT = typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, GRID_SPAN_COUNT)
+
+        NUMBER_OF_ROWS = typedArray.getInt(R.styleable.StepperViewRV_srv_Vertical_Row, NUMBER_OF_ROWS)
 
         typedArray.recycle()
 
     }
 
     //ui rendering
-    private fun initUi() {
+    private fun initUi(context: Context) {
 
-        contentRecyclerView = findViewById(R.id.stepper_view)
+        contentRecyclerView = findViewById(R.id.stepper_rview)
         contentRecyclerView?.setHasFixedSize(true) //for optimization
         contentRecyclerView.apply {
             this?.layoutManager = if (!isVertical) {
@@ -84,7 +94,7 @@ class StepperRV : ConstraintLayout {
                     context,
                     NUMBER_OF_ROWS,
                     GridLayoutManager.HORIZONTAL,
-                    false
+                    REVERSE_LAYOUT
                 ) {
                     override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
                         // force height of viewHolder here, this will override layout_height from items xml
@@ -94,7 +104,7 @@ class StepperRV : ConstraintLayout {
                 }
             } else {
 
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, REVERSE_LAYOUT)
             }
         }
 
@@ -141,7 +151,9 @@ class StepperRV : ConstraintLayout {
 
     //dynamic list for content
     fun setContent(progressContentList: ArrayList<BaseStepperItem>) {
-        adapter.updateContent(progressContentList)
+        if (::adapter.isInitialized) {
+            adapter.updateContent(progressContentList)
+        }
     }
 
 }
