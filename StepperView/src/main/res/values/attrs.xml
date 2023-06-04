@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StepperViewRV">
+
+        <attr name="srv_spanCount" format="integer"/>
+        <attr name="srv_isVertical" format="boolean"/>
+
+    </declare-styleable>
+
+</resources>
