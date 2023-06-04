@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.mak.recycler.stepperview.adapter.StepperAdapter
 import com.mak.recycler.stepperview.model.StepperItem
-import com.mak.recycler.stepperview.widget.StepperRV
+import com.mak.recycler.stepperview.widget.StepperRView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val stepperView = findViewById<StepperRV>(R.id.stepper_view)
+        val stepperView = findViewById<StepperRView>(R.id.stepper_view)
 
 
         val title = StepperItem(

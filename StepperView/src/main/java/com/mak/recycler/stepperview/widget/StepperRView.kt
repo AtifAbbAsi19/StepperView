@@ -13,7 +13,7 @@ import com.mak.recycler.stepperview.adapter.StepperAdapter
 import com.mak.recycler.stepperview.model.core.BaseStepperItem
 
 
-class StepperRV : ConstraintLayout {
+class StepperRView : ConstraintLayout {
 
     //Content view
     private var contentRecyclerView: RecyclerView? = null
@@ -95,24 +95,27 @@ class StepperRV : ConstraintLayout {
         contentRecyclerView = findViewById(R.id.stepper_rview)
         contentRecyclerView?.setHasFixedSize(true) //for optimization
         contentRecyclerView.apply {
-            this?.layoutManager = if (!isVertical) {
-                //GridLayoutManager(context, gridSpanCount)
-                object : GridLayoutManager(
-                    context,
-                    NUMBER_OF_ROWS,
-                    GridLayoutManager.HORIZONTAL,
-                    REVERSE_LAYOUT
-                ) {
-                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
-                        // force height of viewHolder here, this will override layout_height from items xml
-                        lp!!.width = width / GRID_SPAN_COUNT
-                        return true
-                    }
-                }
-            } else {
+            this?.layoutManager =
 
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, REVERSE_LAYOUT)
-            }
+                if (isEnabledVerticalRow) {
+                    GridLayoutManager(context, GRID_SPAN_COUNT)
+                } else if (!isVertical) {
+                    object : GridLayoutManager(
+                        context,
+                        NUMBER_OF_ROWS,
+                        GridLayoutManager.HORIZONTAL,
+                        REVERSE_LAYOUT
+                    ) {
+                        override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                            // force height of viewHolder here, this will override layout_height from items xml
+                            lp!!.width = width / GRID_SPAN_COUNT
+                            return true
+                        }
+                    }
+                } else {
+
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, REVERSE_LAYOUT)
+                }
         }
 
 
@@ -139,6 +142,11 @@ class StepperRV : ConstraintLayout {
     // dynamic adapter for view
     fun setAdapter(adapter: RecyclerView.Adapter<*>) {
         contentRecyclerView?.adapter = adapter
+    }
+
+
+    fun setReverseLayout(isReverseLayout: Boolean) {
+        this.REVERSE_LAYOUT = isReverseLayout
     }
 
     //to check adapter configs
