@@ -77,8 +77,9 @@ class StepperRV : ConstraintLayout {
                 isEnabledVerticalRow
             )
 
-        GRID_SPAN_COUNT =
-            typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, GRID_SPAN_COUNT)
+        if (!isVertical)
+            GRID_SPAN_COUNT =
+                typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, GRID_SPAN_COUNT)
 
         if (isEnabledVerticalRow)
             NUMBER_OF_ROWS =

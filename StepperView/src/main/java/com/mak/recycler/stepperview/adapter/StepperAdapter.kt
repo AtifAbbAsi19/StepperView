@@ -112,14 +112,14 @@ class StepperAdapter(
 
             when (content?.isSuccess) {
                 true -> {//R.id.progress_circle
-                    progressIcon.setBackgroundResource(content.successIcon)
-                    progressLine.setBackgroundResource(content.successLine)
+                    progressIcon.setBackgroundResource(content.successIconRes)
+                    progressLine.setBackgroundResource(content.successLineRes)
 
                 }
 
                 else -> {
-                    progressIcon.setBackgroundResource(content!!.icon)
-                    progressLine.setBackgroundResource(content.progressLine)
+                    progressIcon.setBackgroundResource(content!!.progressIconRes)
+                    progressLine.setBackgroundResource(content.progressLineRes)
                 }
 
             }
@@ -156,14 +156,14 @@ class StepperAdapter(
 
             when (content?.isSuccess) {
                 true -> {//R.id.progress_circle
-                    progressIcon.setBackgroundResource(content.successIcon)
-                    progressLine.setBackgroundResource(content.successLineHorizontal)
+                    progressIcon.setBackgroundResource(content.successIconRes)
+                    progressLine.setBackgroundResource(content.successLineHorizontalRes)
 
                 }
 
                 else -> {
-                    progressIcon.setBackgroundResource(content!!.icon)
-                    progressLine.setBackgroundResource(content.progressLineHorizontal)
+                    progressIcon.setBackgroundResource(content!!.progressIconRes)
+                    progressLine.setBackgroundResource(content.progressLineHorizontalRes)
                 }
 
             }
