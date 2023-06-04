@@ -2,6 +2,7 @@ package com.mak.recycler.steppeview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.mak.recycler.stepperview.adapter.StepperAdapter
 import com.mak.recycler.stepperview.model.StepperItem
 import com.mak.recycler.stepperview.widget.StepperRV
@@ -26,27 +27,22 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-
-
-        stepperView.setAdapter(
-            StepperAdapter(
-                arrayListOf(
-                    title,
-                    description,
-                    title,
-                    description,
-                    title,
-                    description
-                ),
-                { item, position ->
-
-                },
-                false
-            )
+        val stepperAdapter = StepperAdapter(
+            arrayListOf(
+                title,
+                description,
+                title,
+                description,
+                title,
+                description
+            ),
+            { item, position ->
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
+            },
+            false
         )
 
-
-
+        stepperView.setAdapter(stepperAdapter)
 
 
     }

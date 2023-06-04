@@ -16,7 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srv_isVertical="false"
-        app:srv_spanCount="3" />
+        app:srv_spanCount="2"
+        app:srv_Vertical_Row="3"
+        app:srv_Enable_Vertical_Row="false"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

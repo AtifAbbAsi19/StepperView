@@ -21,9 +21,16 @@ class StepperAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+
     private var _itemAction: ((Any, Int) -> Unit)? = itemAction
     private var _isVerticalView = isVertical
     private var _progressContentList: ArrayList<BaseStepperItem> = progressContentList
+
+    init {
+        this._itemAction = itemAction
+        this._isVerticalView = isVertical
+        this._progressContentList = progressContentList
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -137,8 +144,12 @@ class StepperAdapter(
         val progressLine = itemView.findViewById<ShapeableImageView>(R.id.progress_line)
 
 
+
         fun bind(content: BaseStepperItem?) {
 
+            itemView.setOnClickListener {
+                _itemAction?.invoke(content as Any, -1)
+            }
 
             title.text = content?.title
             description.text = content?.description

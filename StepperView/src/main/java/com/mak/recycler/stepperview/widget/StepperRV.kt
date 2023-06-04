@@ -72,11 +72,17 @@ class StepperRV : ConstraintLayout {
         isVertical = typedArray.getBoolean(R.styleable.StepperViewRV_srv_isVertical, isVertical)
 
         isEnabledVerticalRow =
-            typedArray.getBoolean(R.styleable.StepperViewRV_srv_Enable_Vertical_Row, isEnabledVerticalRow)
+            typedArray.getBoolean(
+                R.styleable.StepperViewRV_srv_Enable_Vertical_Row,
+                isEnabledVerticalRow
+            )
 
-        GRID_SPAN_COUNT = typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, GRID_SPAN_COUNT)
+        GRID_SPAN_COUNT =
+            typedArray.getInt(R.styleable.StepperViewRV_srv_spanCount, GRID_SPAN_COUNT)
 
-        NUMBER_OF_ROWS = typedArray.getInt(R.styleable.StepperViewRV_srv_Vertical_Row, NUMBER_OF_ROWS)
+        if (isEnabledVerticalRow)
+            NUMBER_OF_ROWS =
+                typedArray.getInt(R.styleable.StepperViewRV_srv_Vertical_Row, NUMBER_OF_ROWS)
 
         typedArray.recycle()
 
